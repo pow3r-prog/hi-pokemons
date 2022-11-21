@@ -6,8 +6,10 @@ const initialState: PokemonState = {
     pokemon: undefined,
 }
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default (state = initialState, action: PokemonActions): PokemonState => {
+const pokemonReducer = (
+    state = initialState,
+    action: PokemonActions,
+): PokemonState => {
     switch (action.type) {
         case pokemonsTypes.SET_POKEMONS:
             return {
@@ -25,3 +27,5 @@ export default (state = initialState, action: PokemonActions): PokemonState => {
             }
     }
 }
+
+export default pokemonReducer

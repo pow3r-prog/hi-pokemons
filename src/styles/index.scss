@@ -14,8 +14,7 @@ code {
 }
 
 .App {
-  display: flex;
-  justify-content: center;
+  padding: 0 25px;
 }
 
 .inner-container {
@@ -23,7 +22,7 @@ code {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin: 165px 0 0 200px;
+  margin-top: 165px;
   width: 100%;
   max-width: 100%;
 }

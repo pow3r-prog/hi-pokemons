@@ -1,6 +1,7 @@
 import { pokemonsTypes } from './actionTypes'
 import {
     IPokemon,
+    IPokemons,
     FetchPokemonByIdRequest,
     FetchPokemonPayload,
     FetchPokemonsPayload,
@@ -24,14 +25,14 @@ export const fetchPokemonAction = (
 })
 
 export const SetPokemonsAction = (payload: {
-    pokemons: IPokemon[] | undefined
+    pokemons: IPokemons[] | undefined
 }): SetPokemons => ({
     type: pokemonsTypes.SET_POKEMONS,
     payload,
 })
 
 export const SetPokemonAction = (payload: {
-    pokemon: IPokemon
+    pokemon: IPokemon | undefined
 }): SetPokemon => ({
     type: pokemonsTypes.SET_POKEMON,
     payload,

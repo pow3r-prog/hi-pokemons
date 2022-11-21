@@ -3,23 +3,39 @@ import { TCallBack } from 'config/types'
 import { pokemonsTypes } from './actionTypes'
 
 export interface PokemonState {
-    pokemons?: IPokemon[]
+    pokemons?: IPokemons[]
     pokemon?: IPokemon
+    results?: IResults[]
 }
 
-// TODO types for pokemons
+export interface IPokemons {
+    name: string
+    url: string
+}
+
 export interface IPokemon {
     id?: string
-    title: string
-    description: string
-    imageUrl?: string
-    exception?: {
-        Message: string
-    }
+    name: string
+    sprites: TPokemon
+    stats: TPokemon[]
+    types: TPokemon[]
+}
+
+export interface IResults {
+    results: IPokemons[]
+}
+
+type TPokemon = {
+    front_default: string
+    base_stat: number | string
+    type: TTypeName
+}
+
+type TTypeName = {
+    name: string
 }
 
 export interface FetchPokemonsPayload {
-    appId: string
     callback?: TCallBack
 }
 
@@ -29,8 +45,7 @@ export interface FetchPokemonsRequest {
 }
 
 export interface FetchPokemonPayload {
-    pokemonId: string
-    appId: string
+    pokemonName: string | undefined
     callback?: TCallBack
 }
 
@@ -41,12 +56,12 @@ export interface FetchPokemonByIdRequest {
 
 export interface SetPokemons {
     type: typeof pokemonsTypes.SET_POKEMONS
-    payload: { pokemons: IPokemon[] | undefined }
+    payload: { pokemons: IPokemons[] | undefined }
 }
 
 export interface SetPokemon {
     type: typeof pokemonsTypes.SET_POKEMON
-    payload: { pokemon: IPokemon }
+    payload: { pokemon: IPokemon | undefined }
 }
 
 export type PokemonActions =
