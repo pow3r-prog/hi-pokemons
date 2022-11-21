@@ -1,17 +1,31 @@
 import React from 'react'
 
+import { useNavigate } from 'react-router-dom'
+
+import { POKEMON_URLS } from 'config/urls'
+
 import './SearchPokemon.scss'
 
 interface ISearch {
+    onInputSearch: (name: string) => void
     name: string
-    onSearch: (event: any) => void
 }
 
-const SearchPokemon = ({ name, onSearch }: ISearch): React.ReactElement => {
+const SearchPokemon = ({
+    onInputSearch,
+    name,
+}: ISearch): React.ReactElement => {
+    const push = useNavigate()
+
     return (
         <div className='search--bar'>
-            <input type='text' onChange={onSearch} />
-            <button>Search</button>
+            <input
+                type='text'
+                onChange={event => onInputSearch(event.target.value)}
+            />
+            <button onClick={() => push(`${POKEMON_URLS.pokemon}/${name}`)}>
+                Search
+            </button>
         </div>
     )
 }

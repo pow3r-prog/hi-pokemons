@@ -9,7 +9,12 @@ const sagaMiddleware = createSagaMiddleware()
 
 const store = configureStore({
     reducer: rootReducer,
-    middleware: getDefaultMiddleware => getDefaultMiddleware().concat(logger),
+    middleware: getDefaultMiddleware => [
+        ...getDefaultMiddleware({
+            serializableCheck: false,
+        }).concat(logger),
+        sagaMiddleware,
+    ],
 })
 
 sagaMiddleware.run(rootSaga)

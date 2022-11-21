@@ -1,0 +1,27 @@
+@import 'styles/variables.scss';
+
+.pokemon--item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: $color-white;
+    border-radius: 25px;
+    padding: 10px;
+    margin: 10px 0;
+    width: 100%;
+    font-size: 18px;
+    border: 2px solid transparent;
+
+    &:hover {
+        border: 2px solid $color-light-blue;    
+    }
+
+    &-name {
+        color: $color-dark-grey;
+    }
+
+    &-url {
+        color: $color-light-blue;
+        text-decoration: none;
+    }
+}

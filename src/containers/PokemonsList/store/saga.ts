@@ -2,7 +2,6 @@ import { AxiosResponse } from 'axios'
 import { all, put, takeLatest, AllEffect, ForkEffect } from 'redux-saga/effects'
 
 import * as Effects from 'redux-saga/effects'
-// import { sagaErrorHandle } from 'utils/errHandle'
 
 import { getPokemons, getPokemonById } from '../service/pokemon'
 
@@ -12,24 +11,24 @@ import {
     IPokemon,
     FetchPokemonsRequest,
     FetchPokemonByIdRequest,
+    IResults,
 } from './types'
 
 const call: any = Effects.call
 
 function* fetchPokemonsSaga(action: FetchPokemonsRequest) {
     try {
-        const response: AxiosResponse<IPokemon> = yield call(
+        const response: AxiosResponse<IResults> = yield call(
             getPokemons,
             action.payload,
         )
         if (response.data) {
             yield put({
                 type: pokemonsTypes.SET_POKEMONS,
-                payload: { pokemons: response.data },
+                payload: { pokemons: response.data.results },
             })
         }
     } catch (error) {
-        // sagaErrorHandle(action.payload.callback, error)
         yield put({ type: pokemonsTypes.POKEMONS_REQUEST_FAILED, error })
     }
 }
@@ -47,7 +46,6 @@ function* fetchPokemonByIdSaga(action: FetchPokemonByIdRequest) {
             })
         }
     } catch (error) {
-        // sagaErrorHandle(action.payload.callback, error)
         yield put({ type: pokemonsTypes.POKEMONS_REQUEST_FAILED, error })
     }
 }

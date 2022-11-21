@@ -3,14 +3,14 @@ import { axiosInstance } from 'axiosInstance'
 
 import { POKEMON_URLS } from 'config/urls'
 
-import { IPokemon } from '../store/types'
+import { IPokemon, IResults } from '../store/types'
 
-export const getPokemons = (): Promise<AxiosResponse<IPokemon[]>> =>
+export const getPokemons = (): Promise<AxiosResponse<IResults[]>> =>
     axiosInstance.get(`${POKEMON_URLS.pokemon}`)
 
 export const getPokemonById = ({
-    pokemonId,
+    pokemonName,
 }: {
-    pokemonId: string | number | undefined
+    pokemonName: string | undefined
 }): Promise<AxiosResponse<IPokemon>> =>
-    axiosInstance.get(`${POKEMON_URLS.pokemon}/${pokemonId}/`)
+    axiosInstance.get(`${POKEMON_URLS.pokemon}/${pokemonName}/`)

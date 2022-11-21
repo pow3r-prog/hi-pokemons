@@ -1,0 +1,15 @@
+@import 'styles/variables.scss'; 
+
+.pokemon--info {
+    background: $color-white;
+    font-size: 18px;
+    padding: 25px;
+    border-radius: 25px;
+
+    &-image {
+        width: 200px;
+        border: solid 2px $color-light-blue;
+        border-radius: 25px;
+        margin: 25px 0;
+    }
+}
