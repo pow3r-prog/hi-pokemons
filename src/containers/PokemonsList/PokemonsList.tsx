@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { RootState } from 'redux/reducers/rootReducer'
 
+import ReactPaginate from 'react-paginate'
+
 import SearchPokemon from 'components/searchPokemon/SearchPokemon'
 import PokemonItem from 'components/pokemonItem/PokemonItem'
 import { POKEMON_URLS } from 'config/urls'
@@ -15,9 +17,18 @@ import './PokemonsList.scss'
 
 const PokemonsList = (): React.ReactElement => {
     const [search, setSearch] = useState('')
+    const [pageNumber, setPageNumber] = useState(0)
+
+    const limit = 10
     const dispatch = useDispatch()
 
     const { pokemons } = useSelector((state: RootState) => state.pokemon)
+
+    const pagesVisited = pageNumber * limit
+    const pageCount = Math.ceil(pokemons ? pokemons.length : 0 / limit)
+    const changePage = ({ selected }: any) => {
+        setPageNumber(selected)
+    }
 
     useEffect(() => {
         dispatch(
@@ -45,16 +56,29 @@ const PokemonsList = (): React.ReactElement => {
         <div className='inner-container'>
             <SearchPokemon onInputSearch={setSearch} name={search} />
             {pokemons ? (
-                pokemons.map((item, index) => (
-                    <PokemonItem
-                        key={index}
-                        name={item.name}
-                        url={`${POKEMON_URLS.pokemon}/${item.name}`}
-                    />
-                ))
+                pokemons
+                    .slice(pagesVisited, pagesVisited + limit)
+                    .map((item, index) => (
+                        <PokemonItem
+                            key={index}
+                            name={item.name}
+                            url={`${POKEMON_URLS.pokemon}/${item.name}`}
+                        />
+                    ))
             ) : (
                 <div>Loading...</div>
             )}
+            <ReactPaginate
+                pageCount={pageCount}
+                onPageChange={changePage}
+                previousLabel={'Previous'}
+                nextLabel={'Next'}
+                containerClassName={'paginationBtns'}
+                previousLinkClassName={'previousBtns'}
+                pageLinkClassName={'nextBtn'}
+                disabledClassName={'paginationDisabled'}
+                activeClassName={'paginationActive'}
+            />
         </div>
     )
 }

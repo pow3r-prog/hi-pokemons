@@ -1,2 +1,32 @@
 @import 'styles/variables.scss'; 
 
+.paginationBtns {
+    width: 100%;
+    height: 40px;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .paginationBtns a {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    border: 2px solid $color-light-blue;
+    color: $color-light-blue;
+    background: $color-white;
+  }
+  
+  .paginationBtns a:hover {
+    background: $color-light-blue;
+    color: $color-white;
+    border: 2px solid $color-grey;
+    cursor: pointer;
+  }
+  
+  .paginationActive a {
+    color: $color-white;
+    background-color: $color-light-blue;
+    border: 2px solid $color-grey;
+  }
+  
