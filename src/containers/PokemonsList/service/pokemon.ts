@@ -5,8 +5,12 @@ import { POKEMON_URLS } from 'config/urls'
 
 import { IPokemon, IResults } from '../store/types'
 
-export const getPokemons = (): Promise<AxiosResponse<IResults[]>> =>
-    axiosInstance.get(`${POKEMON_URLS.pokemon}`)
+export const getPokemons = ({
+    limit,
+}: {
+    limit: number | string | undefined
+}): Promise<AxiosResponse<IResults[]>> =>
+    axiosInstance.get(`${POKEMON_URLS.pokemon}?limit=${100}`)
 
 export const getPokemonById = ({
     pokemonName,
